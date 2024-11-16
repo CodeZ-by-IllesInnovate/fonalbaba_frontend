@@ -51,60 +51,97 @@ const ContactForm = () => {
 
   return (
     <div className="mt-12">
-      <div className="max-w-4xl mx-auto p-8 bg-white shadow-md rounded-md">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+      <div className="max-w-3xl mx-auto p-8 bg-gradient-to-r from-[#FFFBEA] to-[#FFFDF5] shadow-xl rounded-lg">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4 text-center">
           Kapcsolatfelvétel
         </h1>
-        <p className="text-gray-600 mb-8">
+        <p className="text-gray-600 mb-8 text-center">
           Ha bármilyen kérdésed van, töltsd ki az alábbi űrlapot.
         </p>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Név"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full px-4 py-2 text-gray-800 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full px-4 py-2 text-gray-800 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <input
-            type="text"
-            name="subject"
-            placeholder="Tárgy"
-            value={formData.subject}
-            onChange={handleChange}
-            className="w-full px-4 py-2 text-gray-800 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <textarea
-            name="message"
-            rows="6"
-            placeholder="Üzenet"
-            value={formData.message}
-            onChange={handleChange}
-            className="w-full px-4 py-2 text-gray-800 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          ></textarea>
+          <div>
+            <label htmlFor="name" className="text-sm font-medium text-gray-700">
+              Név
+            </label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Név"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-4 py-2 mt-2 text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]"
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="email"
+              className="text-sm font-medium text-gray-700"
+            >
+              E-mail
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full px-4 py-2 mt-2 text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]"
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="subject"
+              className="text-sm font-medium text-gray-700"
+            >
+              Tárgy
+            </label>
+            <input
+              id="subject"
+              type="text"
+              name="subject"
+              placeholder="Tárgy"
+              value={formData.subject}
+              onChange={handleChange}
+              className="w-full px-4 py-2 mt-2 text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]"
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="message"
+              className="text-sm font-medium text-gray-700"
+            >
+              Üzenet
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              placeholder="Üzenet"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full px-4 py-2 mt-2 text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]"
+              required
+            ></textarea>
+          </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white font-bold py-3 px-6 rounded-md hover:bg-blue-600 transition duration-200"
+            className={`w-full py-3 text-white font-bold rounded-md transition duration-200 ${
+              isSubmitting
+                ? "bg-[#D4A373] opacity-70"
+                : "bg-[#D4A373] hover:bg-[#C19261]"
+            }`}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Küldés..." : "Küldés"}
           </button>
         </form>
         {responseMessage && (
-          <p className="text-center text-gray-800 mt-4">{responseMessage}</p>
+          <p className="text-center text-gray-700 mt-6">{responseMessage}</p>
         )}
       </div>
     </div>

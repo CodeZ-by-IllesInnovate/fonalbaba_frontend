@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import ImageSlider from "../ImageSlider";
+import ReactMarkdown from "react-markdown";
 
 export default async function ProductPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/mintaks?filters[slug][$eq]=${slug}&populate=*`,
@@ -52,14 +53,14 @@ export default async function ProductPage({ params }) {
             </h1>
             <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
               <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl ">
-                ${formattedPattern.price}
+                {formattedPattern.price} Ft
               </p>
             </div>
 
             {/* Buttons */}
             <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
               <a
-                href="#"
+                href="/kapcsolat"
                 className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:ring-4"
               >
                 Érdeklődés
@@ -69,11 +70,12 @@ export default async function ProductPage({ params }) {
             <hr className="my-6 md:my-8 border-gray-200 " />
 
             {/* Product Description */}
-            <p className="mb-6 text-gray-500 ">{formattedPattern.leiras}</p>
-            <p
-              className="text-gray-500 "
-              dangerouslySetInnerHTML={{ __html: formattedPattern.bovebben }}
-            />
+            <ReactMarkdown className="mb-6 text-gray-500">
+              {formattedPattern.leiras}
+            </ReactMarkdown>
+            <ReactMarkdown className="mb-6 text-gray-500">
+              {formattedPattern.bovebben}
+            </ReactMarkdown>
           </div>
         </div>
       </div>

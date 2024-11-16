@@ -1,28 +1,30 @@
 "use client";
 
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
 
-export default function ImageSlider({ images }) {
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-  };
+import "swiper/css";
+import "swiper/css/pagination";
 
+const ImageSlider = ({ images }) => {
   return (
-    <Slider {...sliderSettings}>
-      {images.map((imageUrl, index) => (
-        <div key={index}>
+    <Swiper
+      spaceBetween={30}
+      pagination={{ clickable: true }}
+      autoplay={{ delay: 3000 }}
+      modules={[Pagination]}
+    >
+      {images.map((image, index) => (
+        <SwiperSlide key={index}>
           <img
-            src={imageUrl}
+            src={image}
             alt={`Image ${index + 1}`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
           />
-        </div>
+        </SwiperSlide>
       ))}
-    </Slider>
+    </Swiper>
   );
-}
+};
+
+export default ImageSlider;

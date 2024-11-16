@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 
 export default function Mintak() {
   const [patterns, setPatterns] = useState([]);
@@ -57,13 +58,13 @@ export default function Mintak() {
                   />
                 </div>
               )}
-              <div className="p-2">
+              <div className="mx-4">
                 <h5 className="mb-2 text-xl font-semibold leading-snug text-gray-900">
                   {pattern.title}
                 </h5>
-                <p className="text-base font-light leading-relaxed text-gray-700">
+                <ReactMarkdown className="text-base leading-relaxed text-left">
                   {pattern.leiras}
-                </p>
+                </ReactMarkdown>
               </div>
               <div className="p-6 pt-0">
                 <Link
