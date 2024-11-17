@@ -64,7 +64,7 @@ const Hero = () => {
             "Fedezd fel az amigurumi világát, ahol álmaid minden öltéssel életre kelnek!"}
         </p>
         <a
-          href="#"
+          href="/mintak"
           className="bg-primary text-textColor py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl hover:bg-accent transition duration-300 transform hover:-translate-y-1"
         >
           {heroData.button || "Minták"}
