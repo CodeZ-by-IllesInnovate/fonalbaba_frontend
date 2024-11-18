@@ -70,9 +70,9 @@ export default async function ProductPage({ params }) {
             <hr className="my-6 md:my-8 border-gray-200 " />
 
             {/* Product Description */}
-            <ReactMarkdown className="mb-6 text-gray-500">
+            {/* <ReactMarkdown className="mb-6 text-gray-500">
               {formattedPattern.leiras}
-            </ReactMarkdown>
+            </ReactMarkdown> */}
             <ReactMarkdown className="mb-6 text-gray-500">
               {formattedPattern.bovebben}
             </ReactMarkdown>
