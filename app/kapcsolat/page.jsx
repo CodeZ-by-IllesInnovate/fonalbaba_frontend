@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 
 const ContactForm = () => {
@@ -8,21 +9,21 @@ const ContactForm = () => {
     subject: "",
     message: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // Input mezők értékeinek kezelése
+  const handleChange = ({ target: { name, value } }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Form beküldésének kezelése
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://fonalbaba.hu/contact.php", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,20 +31,18 @@ const ContactForm = () => {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        setResponseMessage(
-          "Üzenet elküldve! Hamarosan felvesszük veled a kapcsolatot."
-        );
+        setResponseMessage("Üzenet sikeresen elküldve!");
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setResponseMessage(
-          "Hiba történt az üzenet elküldése közben. Kérlek, próbáld újra!"
+          data.error || "Hiba történt az üzenet elküldésekor."
         );
       }
     } catch (error) {
-      setResponseMessage(
-        "Nem sikerült elküldeni az üzenetet. Kérlek, próbáld újra!"
-      );
+      setResponseMessage("Nem sikerült elküldeni az üzenetet. Próbáld újra.");
     } finally {
       setIsSubmitting(false);
     }
@@ -59,57 +58,36 @@ const ContactForm = () => {
           Ha bármilyen kérdésed van, töltsd ki az alábbi űrlapot.
         </p>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name" className="text-sm font-medium text-gray-700">
-              Név
-            </label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              placeholder="Név"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-2 mt-2 text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]"
-              required
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="email"
-              className="text-sm font-medium text-gray-700"
-            >
-              E-mail
-            </label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="E-mail"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 mt-2 text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]"
-              required
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="subject"
-              className="text-sm font-medium text-gray-700"
-            >
-              Tárgy
-            </label>
-            <input
-              id="subject"
-              type="text"
-              name="subject"
-              placeholder="Tárgy"
-              value={formData.subject}
-              onChange={handleChange}
-              className="w-full px-4 py-2 mt-2 text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]"
-              required
-            />
-          </div>
+          {["name", "email", "subject"].map((field) => (
+            <div key={field}>
+              <label
+                htmlFor={field}
+                className="text-sm font-medium text-gray-700"
+              >
+                {field === "name"
+                  ? "Név"
+                  : field === "email"
+                  ? "E-mail"
+                  : "Tárgy"}
+              </label>
+              <input
+                id={field}
+                type={field === "email" ? "email" : "text"}
+                name={field}
+                placeholder={
+                  field === "name"
+                    ? "Név"
+                    : field === "email"
+                    ? "E-mail"
+                    : "Tárgy"
+                }
+                value={formData[field]}
+                onChange={handleChange}
+                className="w-full px-4 py-2 mt-2 text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]"
+                required
+              />
+            </div>
+          ))}
           <div>
             <label
               htmlFor="message"

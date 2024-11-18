@@ -38,38 +38,36 @@ export default function Mintak() {
 
   return (
     <section className="mt-20 font-mono">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold mb-6 my-8 tracking-wide text-yellow-600">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold mb-8 tracking-wide text-center text-yellow-600">
           Legújabb minták
         </h2>
-        <div className="flex flex-wrap-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {patterns.map((pattern) => (
             <div
               key={pattern.id}
-              className="relative flex flex-col text-yellow-600 bg-white shadow-lg rounded-xl w-80 text-center"
+              className="relative flex flex-col bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-xl transition-shadow"
             >
-              {/* Képek megjelenítése, ha van elérhető kép */}
+              {/* Képek megjelenítése */}
               {pattern.images.length > 0 && (
-                <div className="relative h-[25rem] mx-4 my-4 overflow-hidden shadow-lg rounded-xl">
+                <div className="relative h-64 w-full bg-gray-100 flex items-center justify-center">
                   <img
                     src={`${process.env.NEXT_PUBLIC_URL}${pattern.images[0]}`}
                     alt={pattern.title}
-                    className="object-cover w-full h-full"
+                    className="object-contain w-full h-full"
                   />
                 </div>
               )}
-              <div className="mx-4">
-                <h5 className="mb-2 text-xl font-semibold leading-snug text-gray-900">
+              <div className="flex flex-col p-6 flex-grow">
+                <h5 className="mb-3 text-2xl font-semibold text-gray-800">
                   {pattern.title}
                 </h5>
-                <ReactMarkdown className="text-base leading-relaxed text-left">
+                <ReactMarkdown className="text-sm text-gray-600 leading-relaxed flex-grow">
                   {pattern.leiras}
                 </ReactMarkdown>
-              </div>
-              <div className="p-6 pt-0">
                 <Link
                   href={`/mintak/${pattern.slug}`}
-                  className="block text-center px-6 py-3 text-xs font-bold text-textColor uppercase bg-gradient-to-r from-primary to-secondary rounded-lg shadow-md transition-all hover:shadow-lg focus:opacity-85 active:opacity-85"
+                  className="mt-4 inline-block text-center px-6 py-2 text-sm font-medium text-white bg-yellow-600 rounded-full shadow-md transition-all hover:bg-yellow-700 focus:ring focus:ring-yellow-300"
                 >
                   Részletek
                 </Link>

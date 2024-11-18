@@ -53,7 +53,7 @@ const MintakPage = () => {
               >
                 {/* Képek megjelenítése, ha van elérhető kép */}
                 {pattern.images.length > 0 && (
-                  <div className="relative h-[15rem] w-full overflow-hidden rounded-t-2xl">
+                  <div className="relative h-64 w-full bg-gray-100 flex items-center justify-center">
                     <img
                       src={`${process.env.NEXT_PUBLIC_URL}${pattern.images[0]}`}
                       alt={pattern.title}
