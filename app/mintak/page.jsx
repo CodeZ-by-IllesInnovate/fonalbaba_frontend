@@ -63,12 +63,12 @@ const MintakPage = () => {
                 )}
                 <div className="flex flex-col justify-between flex-grow p-6">
                   <div>
-                    <h5 className="text-xl font-semibold text-gray-800">
+                    <h5 className="text-xl font-semibold text-gray-800 text-center">
                       {pattern.title}
                     </h5>
-                    <ReactMarkdown className="text-sm text-gray-600 leading-relaxed">
+                    {/* <ReactMarkdown className="text-sm text-gray-600 leading-relaxed">
                       {pattern.leiras}
-                    </ReactMarkdown>
+                    </ReactMarkdown> */}
                   </div>
                   <div className="mt-4">
                     <Link

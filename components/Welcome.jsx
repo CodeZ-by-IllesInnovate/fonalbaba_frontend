@@ -22,7 +22,7 @@ const Welcome = () => {
           `${process.env.NEXT_PUBLIC_STRAPI_URL}/welcome?populate=*`
         );
         const data = await response.json();
-        console.log("welcome data", data.data);
+        // console.log("welcome data", data.data);
         setWelcomeData(data.data);
       } catch (err) {
         // console.error(err);
@@ -32,66 +32,59 @@ const Welcome = () => {
   }, []);
 
   return (
-    <section className=" relative mt-20 border-b border-accent min-h-[800px] py-12 w-full  font-mono">
+    <section className="relative mt-20 border-b border-accent min-h-[800px] py-12 w-full font-mono overflow-x-hidden">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
-        <div className="w-full md:w-1/2 pr-4" data-aos="fade-right">
+        <div
+          className="w-full md:w-1/2 pr-4 aos-init aos-animate"
+          data-aos="fade-right"
+        >
           {welcomeData && (
-            <h1 className="text-3xl font-bold text-yellow-600">
-              {welcomeData.header}
-            </h1>
-          )}
-          {welcomeData && (
-            <h2 className="text-2xl text-yellow-500 mt-2">
-              {welcomeData.greetingPrefix}{" "}
-              <span className="text-yellow-700 font-semibold">
-                {welcomeData.highlightedText}
-              </span>{" "}
-              {welcomeData.greetingSuffix}
-            </h2>
-          )}
-          {welcomeData && (
-            <p className="mt-4 text-lg text-gray-700">
-              {welcomeData.paragraph_1}
-            </p>
+            <>
+              <h1 className="text-3xl font-bold text-yellow-600">
+                {welcomeData.header}
+              </h1>
+              <h2 className="text-2xl text-yellow-500 mt-2">
+                {welcomeData.greetingPrefix}{" "}
+                <span className="text-yellow-700 font-semibold">
+                  {welcomeData.highlightedText}
+                </span>{" "}
+                {welcomeData.greetingSuffix}
+              </h2>
+              <p className="mt-4 text-lg text-gray-700">
+                {welcomeData.paragraph_1}
+              </p>
+            </>
           )}
           <div className="mt-6 text-left">
             {welcomeData && (
-              <p className="mb-4 text-gray-700">{welcomeData.paragraph_2}</p>
+              <>
+                <p className="mb-4 text-gray-700">{welcomeData.paragraph_2}</p>
+                <p className="text-lg font-semibold text-yellow-600">
+                  {welcomeData.question_1}
+                </p>
+                <p className="mb-4 text-gray-700">{welcomeData.paragraph_3}</p>
+                <p className="text-lg font-semibold text-yellow-600">
+                  {welcomeData.question_2}
+                </p>
+              </>
             )}
-            {welcomeData && (
-              <p className="text-lg font-semibold text-yellow-600">
-                {welcomeData.question_1}
-              </p>
-            )}
-            {welcomeData && (
-              <p className="mb-4 text-gray-700">{welcomeData.paragraph_3}</p>
-            )}
-            {welcomeData && (
-              <p className="text-lg font-semibold text-yellow-600">
-                {" "}
-                {welcomeData.question_2}
-              </p>
-            )}
-
             <ul className="list-disc list-inside text-gray-700">
-              <li>
-                <strong>Részletes leírások:</strong>{" "}
-                {welcomeData && (
-                  <p className="text-gray-700">{welcomeData.paragraph_4}</p>
-                )}
-              </li>
-              <li>
-                <strong>Szuper ötletek:</strong>
-                {welcomeData && (
-                  <p className="text-gray-700">{welcomeData.paragraph_5}</p>
-                )}
-              </li>
-              <li>
-                <strong>Segítség a kezdőknek:</strong>
-                {welcomeData && (
-                  <p className="text-gray-700">{welcomeData.paragraph_6}</p>
-                )}
-              </li>
+              {welcomeData && (
+                <>
+                  <li>
+                    <strong>Részletes leírások:</strong>{" "}
+                    <p className="text-gray-700">{welcomeData.paragraph_4}</p>
+                  </li>
+                  <li>
+                    <strong>Szuper ötletek:</strong>
+                    <p className="text-gray-700">{welcomeData.paragraph_5}</p>
+                  </li>
+                  <li>
+                    <strong>Segítség a kezdőknek:</strong>
+                    <p className="text-gray-700">{welcomeData.paragraph_6}</p>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

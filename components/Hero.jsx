@@ -14,7 +14,7 @@ const Hero = () => {
         const data = await response.json();
         setHeroData(data.data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       }
     };
     fetchHeroData();
@@ -47,27 +47,27 @@ const Hero = () => {
     <div className="relative h-screen text-white bg-gradient-to-b from-black via-gray-900 to-gray-800">
       <div className="absolute inset-0">
         <img
-          src={`${process.env.NEXT_PUBLIC_URL}/uploads/IMG_20240919_171359_edit_92083765496851_e196eaf9bd_a5bc3b96ac.jpg`}
+          src={`${process.env.NEXT_PUBLIC_URL}${heroData[0].hero_image.url}`}
           alt="Background"
-          className="object-cover object-center w-full h-full"
+          className="object-cover object-center w-full h-full object-"
         />
 
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       </div>
 
       <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4">
-        <h1 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 drop-shadow-lg">
-          {heroData.title || "Köszöntelek az oldalamon!"}
+        <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+          {heroData[0].title}
         </h1>
         <p className="text-lg md:text-2xl text-gray-200 max-w-3xl mb-8 leading-relaxed">
-          {heroData.description ||
+          {heroData[0].description ||
             "Fedezd fel az amigurumi világát, ahol álmaid minden öltéssel életre kelnek!"}
         </p>
         <a
-          href="#"
+          href="/mintak"
           className="bg-primary text-textColor py-3 px-8 rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl hover:bg-accent transition duration-300 transform hover:-translate-y-1"
         >
-          {heroData.button || "Minták"}
+          {heroData[0].button || "Minták"}
         </a>
       </div>
     </div>
